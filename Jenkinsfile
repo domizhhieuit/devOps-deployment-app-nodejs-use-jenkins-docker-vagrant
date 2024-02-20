@@ -3,8 +3,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'trackinggg'
-                sh '''docker -v'''
+                withDockerRegistry(credentialsId: 'study-jenkins', url: 'https://index.docker.io/v1/') {
+                    sh '''docker build -t domizhhieu6389/nodejs-study-jenkins .'''
+                    sh '''docker push domizhhieu6389/nodejs-study-jenkins .'''
+                }
             }
         }
         stage('Test') {
