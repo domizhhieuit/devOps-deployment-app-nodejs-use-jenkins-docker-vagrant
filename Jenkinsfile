@@ -2,8 +2,7 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            def dockerHome = tool 'myDocker'
-            env.PATH = "${dockerHome}/bin:${env.PATH}"
+            echo 'trackinggg'
             steps {
                 sh '''docker -v'''
             }
