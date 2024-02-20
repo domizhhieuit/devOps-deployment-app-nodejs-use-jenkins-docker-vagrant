@@ -2,10 +2,9 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            agent any
-
             steps {
                 withDockerRegistry(credentialsId: 'study-jenkins', url: 'https://index.docker.io/v1/') {
+                    sh '''docker -v'''
                     sh '''docker build -t domizhhieu6389/nodejs-study-jenkins .'''
                     sh '''docker push domizhhieu6389/nodejs-study-jenkins .'''
                 }
