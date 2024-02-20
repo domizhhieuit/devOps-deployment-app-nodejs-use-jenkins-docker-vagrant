@@ -2,8 +2,8 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            echo 'trackinggg'
             steps {
+                echo 'trackinggg'
                 sh '''docker -v'''
             }
         }
