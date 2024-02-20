@@ -3,24 +3,22 @@ pipeline {
 
     stages {
         stage('Build') {
+            agent any
+
             steps {
-                // Xây dựng hình ảnh Docker từ Dockerfile và đặt tên là domizhhieu6389/nodejs-study-jenkins
-                script {
-                    def dockerImage = docker.build('domizhhieu6389/nodejs-study-jenkins', 'nginx:latest')
-                    // Đẩy hình ảnh đã xây dựng lên Docker Registry
-                    dockerImage.push()
+                withDockerRegistry(credentialsId: 'study-jenkins', url: 'https://index.docker.io/v1/') {
+                    sh '''docker build -t domizhhieu6389/nodejs-study-jenkins .'''
+                    sh '''docker push domizhhieu6389/nodejs-study-jenkins .'''
                 }
             }
         }
         stage('Test') {
             steps {
-                // Bước kiểm tra
                 echo 'Testing..'
             }
         }
         stage('Deploy') {
             steps {
-                // Bước triển khai
                 echo 'Deploying....'
             }
         }
